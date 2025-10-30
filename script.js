@@ -75,3 +75,170 @@ console.log(`Movies: ${person.movies.join(", ")}`);
 console.log(`City: ${person.address.city}`);
 const {address: {street, state}} = person;
 console.log(`Street: ${street}, State: ${state}`);
+
+//array of objects
+let employees = [
+    {name: "Charlie", position: "Manager", salary: 70000},
+    {name: "Dana", position: "Developer", salary: 60000},
+    {name: "Eli", position: "Designer", salary: 50000}
+];  
+console.log(employees);
+employees.forEach(emp => {
+    console.log(`Employee: ${emp.name}, Position: ${emp.position}, Salary: ${emp.salary}`);
+});
+
+//json
+let jsonString = JSON.stringify(person);
+console.log(`JSON String: ${jsonString}`);
+let jsonObject = JSON.parse(jsonString);
+console.log(`Parsed Object:`, jsonObject);
+
+//loops
+for(let i = 0; i < 5; i++) {
+    console.log(`For Loop Iteration: ${i}`);
+}
+let count = 0;
+while(count < 3) {
+    console.log(`While Loop Count: ${count}`);
+    count++;
+}
+let doCount = 0;
+do {
+    console.log(`Do-While Loop Count: ${doCount}`);
+    doCount++;
+} while(doCount < 2);
+for(let emp of employees) {
+    console.log(`For-Of Employee: ${emp.name}`);
+    console.log(`Position: ${emp.position}`);
+    console.log(`Salary: ${emp.salary}`);
+}
+
+employees.forEach(emp => {
+    console.log(`ForEach Employee: ${emp.name}`);
+    console.log(`Position: ${emp.position}`);
+    console.log(`Salary: ${emp.salary}`);
+});
+
+//map,filter, reduce
+let highEarners = employees.filter(emp => emp.salary > 55000);
+console.log("High Earners:");
+highEarners.forEach(emp => {
+    console.log(`Name: ${emp.name}, Salary: ${emp.salary}`);
+});
+let employeeNames = employees.map(emp => emp.name);
+console.log(`Employee Names: ${employeeNames.join(", ")}`);
+let totalSalary = employees.reduce((total, emp) => total + emp.salary, 0);
+console.log(`Total Salary: ${totalSalary}`);
+
+//conditions
+let testScore = 85;
+if(testScore >= 90) {
+    console.log("Grade: A");
+} else if(testScore >= 80) {
+    console.log("Grade: B");
+} else {
+    console.log("Grade: C");
+}
+let my_age = 17;
+let access = (my_age >= 18) ? "Granted" : "Denied";
+console.log(`Access: ${access}`);
+switch(my_age) {
+    case 16:
+        console.log("You can drive.");
+        break;
+    case 17:
+        console.log("You can get a learner's permit.");
+        break;
+    case 18:
+        console.log("You can vote.");
+        break;
+    default:
+        console.log("Enjoy your youth!");
+}
+
+//functions
+function add(a, b) {
+    return a + b;
+}
+console.log(`Add Function: 5 + 3 = ${add(5, 3)}`);
+const multiply = (a, b) => a * b;
+console.log(`Multiply Function: 4 * 6 = ${multiply(4, 6)}`);
+function greet(name = "Guest") {
+    return `Hello, ${name}!`;
+}   
+console.log(greet("Alice"));
+const square = n => n * n;
+console.log(`Square Function: 7^2 = ${square(7)}`);
+
+//object-oriented programming
+class Car {
+    constructor(make, model, year) {
+        this.make = make;
+        this.model = model;
+        this.year = year;
+    }
+    getCarInfo() {
+        return `${this.year} ${this.make} ${this.model}`;
+    }
+}
+let myCar = new Car("Toyota", "Camry", 2020);
+console.log(myCar.getCarInfo());
+
+class ElectricCar extends Car {
+    constructor(make, model, year, batteryCapacity) {
+        super(make, model, year);
+        this.batteryCapacity = batteryCapacity;
+    }
+    getCarInfo() {
+        return `${super.getCarInfo()}, Battery Capacity: ${this.batteryCapacity} kWh`;
+    }   
+}
+let myElectricCar = new ElectricCar("Tesla", "Model 3", 2021, 75);
+console.log(myElectricCar.getCarInfo());
+
+//dom manipulation
+//selecting elements
+console.log(document.getElementById('my-form'));    
+const items = document.querySelectorAll('.item');
+
+items.forEach(item => console.log(item.textContent));
+
+//modifying elements
+const header = document.querySelector('h1');
+header.textContent = "Updated Header";
+header.style.color = "blue";
+
+const ul = document.querySelector('.items');
+ul.innerHTML += '<li class="item">Item 4</li>';
+ul.firstElementChild.style.fontWeight = 'bold';
+ul.lastElementChild.style.color = 'red';
+ul.children[1].textContent = 'Updated Item 2';
+ul.children[2].remove();
+
+
+//event handling
+const button = document.querySelector('.btn');    
+button.addEventListener('click', (e) => {
+    e.preventDefault();
+    console.log('Button Clicked!');
+    header.textContent = "Button was Clicked!";
+    header.style.backgroundColor = "yellow";
+});
+
+const nameInput = document.getElementById('name');
+const emailInput = document.getElementById('email');
+const form = document.getElementById('my-form');
+form.addEventListener('submit', onSubmit);
+
+
+
+function onSubmit(e) {
+    e.preventDefault();
+    if(nameInput.value === '' || emailInput.value === '') {
+        alert('Please enter all fields');
+    } else {
+        ul.innerHTML += `<li>Name: ${nameInput.value}, Email: ${emailInput.value}</li>`;
+        nameInput.value = '';
+        emailInput.value = '';
+    }
+}
